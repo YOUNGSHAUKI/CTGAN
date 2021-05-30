@@ -266,6 +266,9 @@ class CTGANSynthesizer(BaseSynthesizer):
 
         if invalid_columns:
             raise ValueError('Invalid columns found: {}'.format(invalid_columns))
+    
+    def getTransform():
+        return self._transformer
 
     def fit(self, train_data, discrete_columns=tuple(), epochs=None):
         """Fit the CTGAN Synthesizer models to the training data.
