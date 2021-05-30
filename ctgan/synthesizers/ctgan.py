@@ -269,7 +269,7 @@ class CTGANSynthesizer(BaseSynthesizer):
         if invalid_columns:
             raise ValueError('Invalid columns found: {}'.format(invalid_columns))
     
-    def getTransformParams():
+    def getTransformParams(self):
         return self._transformer.output_column_transform_info
 
     def fit(self, train_data, discrete_columns=tuple(), epochs=None):
