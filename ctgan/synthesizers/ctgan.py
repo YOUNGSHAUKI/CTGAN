@@ -134,10 +134,12 @@ class CTGANSynthesizer(BaseSynthesizer):
     def __init__(self, embedding_dim=128, generator_dim=(256, 256), discriminator_dim=(256, 256),
                  generator_lr=2e-4, generator_decay=1e-6, discriminator_lr=2e-4,
                  discriminator_decay=1e-6, batch_size=500, discriminator_steps=1,
-                 log_frequency=True, verbose=False, epochs=300, pac=10, cuda=True):
+                 log_frequency=True, verbose=False, epochs=300, pac=10, cuda=True, max_clusters=10):
 
         assert batch_size % 2 == 0
-
+        # 添加max_clusters手动修改
+        self._max_clusters = max_clusters
+        
         self._embedding_dim = embedding_dim
         self._generator_dim = generator_dim
         self._discriminator_dim = discriminator_dim
@@ -293,7 +295,8 @@ class CTGANSynthesizer(BaseSynthesizer):
                 DeprecationWarning
             )
 
-        self._transformer = DataTransformer()
+        # transformer添加手动clusters修改
+        self._transformer = DataTransformer(max_clusters=10)
         self._transformer.fit(train_data, discrete_columns)
 
         train_data = self._transformer.transform(train_data)
