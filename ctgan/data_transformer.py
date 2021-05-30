@@ -68,6 +68,7 @@ class DataTransformer(object):
         This step also counts the #columns in matrix data, and span information.
         """
         self.output_info_list = []
+        self.output_transform = None
         self.output_dimensions = 0
 
         if not isinstance(raw_data, pd.DataFrame):
@@ -89,6 +90,7 @@ class DataTransformer(object):
                     column_name, raw_column_data)
 
             self.output_info_list.append(column_transform_info.output_info)
+            self.output_column_transform_info = column_transform_info
             self.output_dimensions += column_transform_info.output_dimensions
             self._column_transform_info_list.append(column_transform_info)
 
